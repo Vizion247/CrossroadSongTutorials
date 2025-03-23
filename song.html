@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Media</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f1c0f;
+            color: #d4edda;
+            text-align: center;
+            margin: 0;
+            padding-bottom: 60px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #162a16;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #a8e6a2;
+        }
+        .button-group {
+            margin: 20px 0;
+        }
+        button {
+            background: #215d21;
+            color: #a8e6a2;
+            border: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #28a745;
+            transform: scale(1.05);
+        }
+        audio, video {
+            margin-top: 20px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(22, 42, 22, 0.95);
+            color: #a8e6a2;
+            text-align: center;
+            font-size: 1.2em;
+            padding: 10px 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="song-title">Song Title</h1>
+        <div class="button-group">
+            <button id="pdf-button">Download PDF</button>
+            <button id="audio-button">Play Audio</button>
+            <button id="video-button">Play Video</button>
+        </div>
+        <audio id="audio-player" controls style="display:none;"></audio>
+        <video id="video-player" controls width="400" style="display:none;"></video>
+    </div>
+    <div class="footer"> Psalm 95:1 - "Oh come, let us sing to the Lord; let us make a joyful noise to the rock of our salvation!" </div>
+    <script>
+        const songs = [
+            { title: "Grace on Top of Grace", pdf: "pdf-files/Grace-on-Top-of-Grace.pdf", audio: "pdf-files/graceontopofgrace.mp3", video: "pdf-files/Graceontopofgrace(1).mp4" },
+            { title: "Blessed Assurance", pdf: "pdf-files/Blessed Assurance chords.jpg", audio: "pdf-files/blessedassurance.mp3",  }
+            
+        ];
+        const urlParams = new URLSearchParams(window.location.search);
+        const songIndex = parseInt(urlParams.get('song'));
+        const song = songs[songIndex];
+        document.getElementById('song-title').textContent = song.title;
+        document.getElementById('pdf-button').onclick = () => window.open(song.pdf, '_blank');
+        document.getElementById('audio-button').onclick = () => {
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.src = song.audio;
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+        };
+        document.getElementById('video-button').onclick = () => {
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.src = song.video;
+            videoPlayer.style.display = 'block';
+            videoPlayer.play();
+        };
+    </script>
+</body>
+</html>
